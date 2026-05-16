@@ -674,9 +674,7 @@ void interestCalculator() {
                 return;
         }
 
-        // A = P * (1 + r/n)^(n*t)
-        float total    = principal *
-                         (float)pow(1.0 + (rate / 100.0) / n, n * time_yr);
+        float total    = principal * (float)pow(1.0 + (rate / 100.0) / n, n * time_yr);
         float interest = total - principal;
 
         printf("  Type         : Compound Interest (%s)\n", freqName);
@@ -694,8 +692,7 @@ void interestCalculator() {
         printf("  %-6s %-18s %s\n", "Year", "Cumul. Interest", "Balance");
         printDivider('-', 40);
         for (int y = 1; y <= (int)time_yr; y++) {
-            float bal  = principal *
-                         (float)pow(1.0 + (rate / 100.0) / n, n * y);
+            float bal  = principal * (float)pow(1.0 + (rate / 100.0) / n, n * y);
             float intr = bal - principal;
             printf("  %-6d Rs %-14.2f Rs %.2f\n", y, intr, bal);
         }
@@ -726,15 +723,13 @@ int verifyPIN(int index) {
     for (int attempts = 0; attempts < MAX_PIN_ATTEMPTS; attempts++) {
 
         int pin;
-        printf("  Enter PIN (%d attempt(s) left): ",
-               MAX_PIN_ATTEMPTS - attempts);
+        printf("  Enter PIN (%d attempt(s) left): ", MAX_PIN_ATTEMPTS - attempts);
         scanf("%d", &pin);
 
         if (accounts[index].pin == pin) return 1;
 
         if (attempts < MAX_PIN_ATTEMPTS - 1)
-            printf("\n  Wrong PIN! %d attempt(s) remaining.\n\n",
-                   MAX_PIN_ATTEMPTS - attempts - 1);
+            printf("\n  Wrong PIN! %d attempt(s) remaining.\n\n", MAX_PIN_ATTEMPTS - attempts - 1);
     }
 
     accounts[index].locked = 1;
@@ -758,9 +753,7 @@ void logTransaction(int accNo, char type[], float amt, char note[]) {
     strncpy(timeStr, ctime(&t), sizeof(timeStr) - 1);
     timeStr[strcspn(timeStr, "\n")] = '\0';
 
-    fprintf(fp,
-            "[%s] Acc#%d | %-9s | Amt: %9.2f | %s\n",
-            timeStr, accNo, type, amt, note);
+    fprintf(fp, "[%s] Acc#%d | %-9s | Amt: %9.2f | %s\n", timeStr, accNo, type, amt, note);
 
     fclose(fp);
 }
